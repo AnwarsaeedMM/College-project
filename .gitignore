@@ -9,7 +9,6 @@ __pycache__/
 venv/
 
 # Output data
-output/data.csv
 
 # Dataset
 dataset/
