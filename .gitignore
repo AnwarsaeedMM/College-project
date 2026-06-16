@@ -1,0 +1,12 @@
+# VS Code settings
+.vscode/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+
+# Output data
+output/data.csv

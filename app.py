@@ -63,13 +63,13 @@ with col4:
 st.subheader("Enter Clicks Info :-")
 col5, col6, col7 = st.columns(3)
 with col5:
-    HomePageTotalClicks = st.text_input("Home Page Total Clicks", placeholder="0 to 70")
+    HomePageTotalClicks = st.text_input("Home Page Total Clicks" ,placeholder="0 to 70")
     ForumngTotalClicks = st.text_input("Forumng Total Clicks", placeholder="0 to 90")
 with col6:
     SubPageTotalClicks = st.text_input("Sub Page Total Clicks", placeholder="0 to 40")
     OutContentTotalClicks = st.text_input("Out Content Total Clicks", placeholder="0 to 150")
 with col7:
-    ResourceTotalClicks = st.text_input("Resource Total Clicks", placeholder="0 to 10")
+    ResourceTotalClicks =st.text_input("Resource Total Clicks", placeholder="0 to 10")
 
 # Section 3: Other Info
 st.subheader("Enter Other Info :-")
@@ -89,14 +89,14 @@ if st.button("Get Prediction"):
         'disability': [Disability],
         'age_band': [Age],
         'imd_band': [ImdBand],
-        'homepage_totalclicks': [float(HomePageTotalClicks)],
-        'subpage_totalclicks': [float(SubPageTotalClicks)],
-        'forumng_totalclicks': [float(ForumngTotalClicks)],
-        'outcontent_totalclicks': [float(OutContentTotalClicks)],
-        'resource_totalclicks': [float(ResourceTotalClicks)],
-        'average_score': [float(AverageScore)],
-        'studied_credits': [float(StudiedCredits)],
-        'num_of_prev_attempts': [float(NumofPrevAttempts)],
+        'homepage_totalclicks': [float(HomePageTotalClicks or 0)],
+       'subpage_totalclicks': [float(SubPageTotalClicks or 0)],
+       'forumng_totalclicks': [float(ForumngTotalClicks or 0)],
+       'outcontent_totalclicks': [float(OutContentTotalClicks or 0)],
+       'resource_totalclicks': [float(ResourceTotalClicks or 0)],
+       'average_score': [float(AverageScore or 0)],
+       'studied_credits': [float(StudiedCredits or 0)],
+       'num_of_prev_attempts': [float(NumofPrevAttempts or 0)],
     }
 
     input_df = pd.DataFrame(data)
