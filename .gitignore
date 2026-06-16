@@ -10,3 +10,6 @@ venv/
 
 # Output data
 output/data.csv
+
+# Dataset
+dataset/
