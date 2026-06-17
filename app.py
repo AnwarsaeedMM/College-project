@@ -1,6 +1,6 @@
 import streamlit as st
+import joblib           
 import pandas as pd
-import joblib
 
 st.markdown(
     """
