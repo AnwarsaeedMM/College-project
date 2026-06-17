@@ -110,13 +110,10 @@ if st.button("Get Prediction"):
     input_df[['average_score']] = minmax_scaler.transform(input_df[['average_score']])
 
     # Encode categorical
-    input_df['gender'].replace({'Male': 0, 'Female': 1}, inplace=True)
-    input_df['disability'].replace({'No': 0, 'Yes': 1}, inplace=True)
-    input_df['imd_band'].replace({
-        '0-10%':0, '10-20%':1, '20-30%':2, '30-40%':3, '40-50%':4,
-        '50-60%':5, '60-70%':6, '70-80%':7, '80-90%':8, '90-100%':9
-    }, inplace=True)
-    input_df['age_band'].replace({'55<=':2, '35-55':1, '0-35':0}, inplace=True)
+   input_df['gender'] = input_df['gender'].replace({'Male': 0, 'Female': 1})
+input_df['disability'] = input_df['disability'].replace({'No': 0, 'Yes': 1})
+input_df['imd_band'] = input_df['imd_band'].replace({...})
+input_df['age_band'] = input_df['age_band'].replace({'55<=':2, '35-55':1, '0-35':0})
 
     # Dummy model/prediction logic
     def predict_fn(input_df):
@@ -170,7 +167,7 @@ col1, col2 = st.columns([.2, 1.5])
 with col1:
     st.markdown("**Enter Student ID:**")
 with col2:
-    student_id = st.text_input("", key="student_id_small", placeholder="e.g. 645019", label_visibility="collapsed")
+    student_id = st.text_input("Student ID", key="student_id_small", placeholder="e.g. 645019", label_visibility="collapsed")
 
 
 recomend_data = pd.read_csv("output/data.csv")
