@@ -192,6 +192,11 @@ def recommend_learning_path(student_id):
     
     # Remove unnecessary columns for prediction
     student_data.drop(columns=['id_student', 'study_method_preference','Unnamed: 0'], inplace=True)
+
+    # Ensure kmeans_cluster exists
+    if 'kmeans_cluster' not in student_data.columns:
+        student_data = student_data.copy()
+        student_data['kmeans_cluster'] = 0  # default value
     
     # Predict the study method preference
     predicted_label = gb_model.predict(student_data)
