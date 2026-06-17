@@ -199,6 +199,10 @@ def recommend_learning_path(student_id):
         student_data['kmeans_cluster'] = 0  # default value
     
     # Predict the study method preference
+    # Reorder columns to match training order
+    model_features = gb_model.feature_names_in_.tolist()
+    student_data = student_data[model_features]
+    
     predicted_label = gb_model.predict(student_data)
     
     # Extract engagement level
