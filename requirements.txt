@@ -1,8 +1,8 @@
 streamlit
 pandas
-numpy
-scikit-learn
-joblib
+scikit-learn==1.7.2
+numpy==2.3.3
+joblib==1.4.2
 plotly
 openpyxl
 xgboost
