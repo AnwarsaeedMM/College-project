@@ -482,13 +482,13 @@ with tab1:
             input_df[['average_score']] = minmax_scaler.transform(input_df[['average_score']])
 
             # Encode categorical
-            input_df['gender'].replace({'Male': 0, 'Female': 1}, inplace=True)
-            input_df['disability'].replace({'No': 0, 'Yes': 1}, inplace=True)
-            input_df['imd_band'].replace({
+            input_df['gender'] = input_df['gender'].map({'Male': 0, 'Female': 1})
+            input_df['disability'] = input_df['disability'].map({'No': 0, 'Yes': 1})
+            input_df['imd_band'] = input_df['imd_band'].map({
                 '0-10%':0, '10-20%':1, '20-30%':2, '30-40%':3, '40-50%':4,
                 '50-60%':5, '60-70%':6, '70-80%':7, '80-90%':8, '90-100%':9
-            }, inplace=True)
-            input_df['age_band'].replace({'55<=':2, '35-55':1, '0-35':0}, inplace=True)
+            })
+            input_df['age_band'] = input_df['age_band'].map({'55<=':2, '35-55':1, '0-35':0})
 
             # Dummy model/prediction logic
             def predict_fn(input_df):
@@ -604,13 +604,18 @@ with tab2:
             return "Student not found.", "", ""
 
         # Remove unnecessary columns for prediction
-        student_data.drop(columns=['id_student', 'study_method_preference', 'Unnamed: 0'], inplace=True)
+        drop_cols = [c for c in ['id_student', 'study_method_preference', 'Unnamed: 0'] if c in student_data.columns]
+        student_data = student_data.drop(columns=drop_cols)
+
+        # Extract engagement level before reordering
+        engagement = student_data["engagement_classification"].iloc[0]
+
+        # Reorder columns to exactly match training order
+        model_features = gb_model.feature_names_in_.tolist()
+        student_data = student_data[model_features]
 
         # Predict the study method preference
         predicted_label = gb_model.predict(student_data)
-
-        # Extract engagement level
-        engagement = student_data["engagement_classification"].iloc[0]
 
         # Recommendations based on study method and engagement
         recommendations = {
